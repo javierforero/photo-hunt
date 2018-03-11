@@ -1,0 +1,39 @@
+.wrapper {
+    max-width: 1170px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.header {
+    padding: 0 20px;
+    &__logo {
+        font-family: 'liquido-fluid';
+        color: #5571FA;
+        font-size: 2.67rem;
+        margin: 0;
+        padding: 15px;
+    }
+}
+
+.search-form {
+    &__input {
+      width: 100%;
+      padding: 20px 35px;
+      font-size: 0.83rem;
+      border: 2px solid #9B9B9B;
+    }
+    &__button {
+        display: none;
+    }
+}
+
+.results {
+    &__thumbnail {
+        margin-top: 30px;
+    }
+    &__img {
+        display: block;
+        margin: 0 auto;
+        border: 2px solid #5571FA;
+    }
+}

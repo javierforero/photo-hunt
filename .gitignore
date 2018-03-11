@@ -6,6 +6,9 @@
 /tmp
 /out-tsc
 
+#constants
+/constants.ts
+
 # dependencies
 /node_modules
 

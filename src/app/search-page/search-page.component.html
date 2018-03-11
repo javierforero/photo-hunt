@@ -1,0 +1,23 @@
+<div>
+  <header class="header">
+    <h1 class="header__logo">Photo Hunt</h1>
+  </header>
+  <form #frm="ngForm" novalidate class="search-form" (ngSubmit)="onSubmit(frm)" autocomplete="off">
+    <input type="text" 
+           class="search-form__input"
+           name="seachtext"
+           ngModel required 
+           #searchtext="ngModel"
+           placeholder="Search for photos :~)"/>
+    <button type="submit" class="search-form__button"></button>
+  </form>
+  <div class="wrapper results">
+    <div class="row justify-content-center align-items-start">
+      <div class="col-md-4 results__thumbnail" *ngFor="let photo of photos">
+          <img src="{{picUrl(photo.farm, photo.server, photo.id, photo.secret)}}"
+                class="img-fluid results__img"
+                alt="">
+      </div> 
+    </div>
+  </div>
+</div>
