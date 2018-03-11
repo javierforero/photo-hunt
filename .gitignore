@@ -9,6 +9,8 @@
 #constants
 /constants.ts
 constants.ts
+./constants.ts
+.constants
 
 # dependencies
 /node_modules
