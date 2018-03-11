@@ -12,11 +12,13 @@
     <button type="submit" class="search-form__button"></button>
   </form>
   <div class="wrapper results">
-    <div class="row justify-content-center align-items-start">
-      <div class="col-md-4 results__thumbnail" *ngFor="let photo of photos">
+    <div class="results__loading"[ngClass]="{'fade-in': loading}">
+      loading...
+    </div>
+    <div [ngClass]="{'fade-in': last}"  class="row results__row justify-content-center align-items-start">
+      <div class="col-md-4 results__thumbnail" *ngFor="let photo of photos; let last = last">
           <img src="{{picUrl(photo.farm, photo.server, photo.id, photo.secret)}}"
-                class="img-fluid results__img"
-                alt="">
+                class="img-fluid results__img" (load)="imageLoaded()"/>
       </div> 
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PhotoService } from '../photo.service';
 
@@ -8,11 +8,24 @@ import { PhotoService } from '../photo.service';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
+
 export class SearchPageComponent implements OnInit {
 
   constructor(private photoService: PhotoService) { }
   
   photos = [];
+  last = false;
+  imageCount = 0;
+  loading = false;
+  
+  imageLoaded() {
+    this.imageCount++;
+
+    if(this.imageCount === this.photos.length) {
+      this.loading = false;
+      this.last = true;
+    }
+  }
 
   picUrl(farmId, server, pictureId, secret): string {
     let url =  "https://farm"+ 
@@ -26,15 +39,17 @@ export class SearchPageComponent implements OnInit {
   }
 
   onSubmit(searchForm: NgForm) {
-    console.log(searchForm.value.seachtext);
+    this.last = false;
+    this.imageCount = 0;
+    this.loading = true;
     this.photoService.getPhotos(searchForm.value.seachtext)
                      .subscribe(
                        photos => { this.photos = photos.photos.photo},
-                       err => console.log(err),
-                       () => console.log('done getting photos')
+                       err => console.log(err)
                     )
   }
   ngOnInit() {
+
   }
 
 }
