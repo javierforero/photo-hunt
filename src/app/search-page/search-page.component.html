@@ -11,15 +11,24 @@
            placeholder="Search for photos :~)"/>
     <button type="submit" class="search-form__button"></button>
   </form>
+  <div class="results__loading"[ngClass]="{'fade-in': loading}">
+      <h1>Loading...</h1>
+  </div>
   <div class="wrapper results">
-    <div class="results__loading"[ngClass]="{'fade-in': loading}">
-      loading...
-    </div>
     <div [ngClass]="{'fade-in': last}"  class="row results__row justify-content-center align-items-start">
-      <div class="col-md-4 results__thumbnail" *ngFor="let photo of photos; let last = last">
-          <img src="{{picUrl(photo.farm, photo.server, photo.id, photo.secret)}}"
-                class="img-fluid results__img" (load)="imageLoaded()"/>
-      </div> 
+      <div class="col-md-4 results__thumbnail"
+           *ngFor="let photo of photos | paginate: { itemsPerPage: 10, currentPage: p };let i=index; let last = last">
+          <div class="results__imgcontainer" (click)="lightBoxShow[i]=!lightBoxShow[i]">
+            <img src="{{picUrl(photo.farm, photo.server, photo.id, photo.secret)}}"
+                 class="img-fluid results__img" (load)="imageLoaded()"/>
+            <img src="../../assets/enlarge.svg" class="img-fluid results__imgexpand">
+            <figure class="results__lightbox-content" [class.results__lightbox-content-show]="lightBoxShow[i]">
+              <img src="{{picUrl(photo.farm, photo.server, photo.id, photo.secret)}}"
+                  class="img-fluid results__img"/>
+            </figure>    
+          </div> 
+      </div>
+      <pagination-controls class="col-md-12 align-items-center results__pagination" (pageChange)="p = $event"></pagination-controls> 
     </div>
   </div>
 </div>

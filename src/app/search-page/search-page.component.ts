@@ -13,15 +13,17 @@ export class SearchPageComponent implements OnInit {
 
   constructor(private photoService: PhotoService) { }
   
-  photos = [];
-  last = false;
-  imageCount = 0;
-  loading = false;
+  photos: Object[] = [];
+  last: boolean = false;
+  imageCount: number = 0;
+  loading: boolean = false;
+  lightBoxShow: Array<boolean> = [];
+
   
   imageLoaded() {
     this.imageCount++;
 
-    if(this.imageCount === this.photos.length) {
+    if(this.imageCount === 10) {
       this.loading = false;
       this.last = true;
     }
@@ -47,6 +49,7 @@ export class SearchPageComponent implements OnInit {
                        photos => { this.photos = photos.photos.photo},
                        err => console.log(err)
                     )
+    searchForm.reset();
   }
   ngOnInit() {
 
